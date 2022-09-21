@@ -1,18 +1,17 @@
 package com.adsmanager.androidmodule
 
 import com.adsmanager.ads.NetworkAds
-import com.adsmanager.ads.NetworkOpenAd
 
 object ConfigAds {
 
-    var primaryNetworkOpenAd = NetworkOpenAd.ADMOB
-    var secondaryNetworkOpenAd: NetworkOpenAd? = null
-    var tertiaryAdsNetworkOpenAd: NetworkOpenAd? = null
-    var primaryOpenAdId = "123"
-
     var primaryAds: NetworkAds = NetworkAds.ADMOB
-    var secondaryAds: NetworkAds? = null
+    var secondaryAds: NetworkAds? = NetworkAds.ADMOB
     var tertiaryAds: NetworkAds? = null
+
+    var primaryOpenAdId = "123"
+    var secondaryOpenAdId = "ca-app-pub-3940256099942544/3419835294"
+    var tertiaryOpenAdId = "123"
+    var quaternaryOpenAdId = "123"
 
     var primaryBannerId: String = "12323"
     var secondaryBannerId: String? = null

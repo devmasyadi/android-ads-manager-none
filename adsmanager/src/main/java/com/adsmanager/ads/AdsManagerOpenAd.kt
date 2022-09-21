@@ -10,6 +10,7 @@ class AdsManagerOpenAd(
 ) {
 
     private var currentActivity: Activity? = null
+    private var currentNetworkAds = NetworkAds.ADMOB
 
     fun setCurrentActivity(activity: Activity) {
         this.currentActivity = activity
@@ -18,76 +19,136 @@ class AdsManagerOpenAd(
 
     fun getCurrentActivity() = currentActivity
 
-    fun isShowingAd(primaryNetworkOpenAd: NetworkOpenAd): Boolean {
-        return handleIsShowing(primaryNetworkOpenAd)
+    fun isShowingAd(): Boolean {
+        return handleIsShowing(currentNetworkAds)
     }
 
     fun loadAd(
         activity: Activity,
-        primaryNetworkOpenAd: NetworkOpenAd,
+        primaryNetwork: NetworkAds,
         primaryOpenAdUnitId: String,
-        secondaryNetworkOpenAd: NetworkOpenAd?,
-        secondaryOpenAdUnitId: String?,
-        tertiaryNetworkOpenAd: NetworkOpenAd?,
-        tertiaryOpenAdUnitId: String?,
+        secondaryNetwork: NetworkAds?,
+        secondaryOpenAdUnitId: String,
+        tertiaryNetwork: NetworkAds?,
+        tertiaryOpenAdUnitId: String,
+        quaternaryNetwork: NetworkAds?,
+        quaternaryOpenAdUnitId: String,
         callbackAds: CallbackAds?
     ) {
-        handleLoad(activity, primaryOpenAdUnitId, primaryNetworkOpenAd, callbackAds)
-        secondaryOpenAdUnitId?.let { secondaryNetworkOpenAd?.let {
-            handleLoad(activity, secondaryOpenAdUnitId, secondaryNetworkOpenAd, callbackAds)
-        } }
-        tertiaryOpenAdUnitId?.let { tertiaryNetworkOpenAd?.let {
-            handleLoad(activity, tertiaryOpenAdUnitId, tertiaryNetworkOpenAd, callbackAds)
-        } }
+        handleLoad(activity, primaryOpenAdUnitId, primaryNetwork, object : CallbackAds() {
+            override fun onAdFailedToLoad(error: String?) {
+                if (secondaryNetwork == null) callbackAds?.onAdFailedToLoad(error)
+                secondaryNetwork?.let {
+                    handleLoad(
+                        activity,
+                        secondaryOpenAdUnitId,
+                        secondaryNetwork,
+                        object : CallbackAds() {
+                            override fun onAdFailedToLoad(error: String?) {
+                                if (tertiaryNetwork == null) callbackAds?.onAdFailedToLoad(error)
+                                tertiaryNetwork?.let {
+                                    handleLoad(
+                                        activity,
+                                        tertiaryOpenAdUnitId,
+                                        tertiaryNetwork,
+                                        object : CallbackAds() {
+                                            override fun onAdFailedToLoad(error: String?) {
+                                                if (quaternaryNetwork == null) callbackAds?.onAdFailedToLoad(
+                                                    error
+                                                )
+                                                quaternaryNetwork?.let {
+                                                    handleLoad(
+                                                        activity,
+                                                        quaternaryOpenAdUnitId,
+                                                        quaternaryNetwork,
+                                                        callbackAds
+                                                    )
+                                                }
+                                            }
+
+                                            override fun onAdLoaded() {
+                                                callbackAds?.onAdLoaded()
+                                            }
+                                        })
+                                }
+                            }
+
+                            override fun onAdLoaded() {
+                                callbackAds?.onAdLoaded()
+                            }
+                        })
+                }
+            }
+
+            override fun onAdLoaded() {
+                callbackAds?.onAdLoaded()
+            }
+        })
     }
 
     fun showAdIfAvailable(
         activity: Activity,
-        primaryNetworkOpenAd: NetworkOpenAd,
+        primaryNetwork: NetworkAds,
         primaryOpenAdUnitId: String,
-        secondaryNetworkOpenAd: NetworkOpenAd?,
-        secondaryOpenAdUnitId: String?,
-        tertiaryNetworkOpenAd: NetworkOpenAd?,
-        tertiaryOpenAdUnitId: String?,
+        secondaryNetwork: NetworkAds?,
+        secondaryOpenAdUnitId: String,
+        tertiaryNetwork: NetworkAds?,
+        tertiaryOpenAdUnitId: String,
+        quaternaryNetwork: NetworkAds?,
+        quaternaryOpenAdUnitId: String,
         callbackOpenAd: CallbackOpenAd?
     ) {
-        handleShow(activity, primaryOpenAdUnitId, primaryNetworkOpenAd, object : CallbackOpenAd() {
+        handleShow(activity, primaryOpenAdUnitId, primaryNetwork, object : CallbackOpenAd() {
             override fun onShowAdComplete() {
-                if (secondaryNetworkOpenAd == null) {
+                if (secondaryNetwork == null) {
                     callbackOpenAd?.onShowAdComplete()
                 }
             }
 
             override fun onAdFailedToLoad(error: String?) {
                 callbackOpenAd?.onAdFailedToLoad(error)
-                secondaryOpenAdUnitId?.let {
-                    secondaryNetworkOpenAd?.let {
-                        handleShow(
-                            activity,
-                            secondaryOpenAdUnitId,
-                            secondaryNetworkOpenAd,
-                            object : CallbackOpenAd() {
-                                override fun onShowAdComplete() {
-                                    if (tertiaryNetworkOpenAd == null) {
-                                        callbackOpenAd?.onShowAdComplete()
-                                    }
+                secondaryNetwork?.let {
+                    handleShow(
+                        activity,
+                        secondaryOpenAdUnitId,
+                        secondaryNetwork,
+                        object : CallbackOpenAd() {
+                            override fun onShowAdComplete() {
+                                if (tertiaryNetwork == null) {
+                                    callbackOpenAd?.onShowAdComplete()
                                 }
+                            }
 
-                                override fun onAdFailedToLoad(error: String?) {
-                                    callbackOpenAd?.onAdFailedToLoad(error)
-                                    tertiaryOpenAdUnitId?.let {
-                                        tertiaryNetworkOpenAd?.let {
-                                            handleShow(
-                                                activity,
-                                                tertiaryOpenAdUnitId,
-                                                tertiaryNetworkOpenAd,
-                                                callbackOpenAd
-                                            )
+                            override fun onAdFailedToLoad(error: String?) {
+                                callbackOpenAd?.onAdFailedToLoad(error)
+                                tertiaryNetwork?.let {
+                                    handleShow(
+                                        activity,
+                                        tertiaryOpenAdUnitId,
+                                        tertiaryNetwork,
+                                        object : CallbackOpenAd() {
+                                            override fun onShowAdComplete() {
+                                                if (quaternaryNetwork == null) {
+                                                    callbackOpenAd?.onShowAdComplete()
+                                                }
+                                            }
+
+                                            override fun onAdFailedToLoad(error: String?) {
+                                                callbackOpenAd?.onAdFailedToLoad(error)
+                                                quaternaryNetwork?.let {
+                                                    handleShow(
+                                                        activity,
+                                                        quaternaryOpenAdUnitId,
+                                                        quaternaryNetwork,
+                                                        callbackOpenAd
+                                                    )
+                                                }
+                                            }
                                         }
-                                    }
+                                    )
                                 }
-                            })
-                    }
+                            }
+                        })
                 }
             }
         })
@@ -97,32 +158,38 @@ class AdsManagerOpenAd(
     private fun handleLoad(
         activity: Activity,
         adUnitId: String,
-        networkOpenAd: NetworkOpenAd,
+        networkAds: NetworkAds,
         callbackAds: CallbackAds?
     ) {
-        when (networkOpenAd) {
-            NetworkOpenAd.ADMOB -> admobOpenAd.loadAd(activity, adUnitId, callbackAds)
+        when (networkAds) {
+            NetworkAds.ADMOB -> admobOpenAd.loadAd(activity, adUnitId, callbackAds)
+            else -> {
+                callbackAds?.onAdFailedToLoad("Open Ad ${networkAds.name} not available")
+            }
         }
     }
 
     private fun handleShow(
         activity: Activity,
         adUnitId: String,
-        networkOpenAd: NetworkOpenAd,
+        networkAds: NetworkAds,
         callbackOpenAd: CallbackOpenAd?
     ) {
-        when (networkOpenAd) {
-            NetworkOpenAd.ADMOB -> admobOpenAd.showAdIfAvailable(activity, adUnitId, callbackOpenAd)
+        when (networkAds) {
+            NetworkAds.ADMOB -> {
+                currentNetworkAds = networkAds
+                admobOpenAd.showAdIfAvailable(activity, adUnitId, callbackOpenAd)
+            }
+            else -> {
+                callbackOpenAd?.onAdFailedToLoad("Open Ad ${networkAds.name} not available")
+            }
         }
     }
 
-    private fun handleIsShowing(networkOpenAd: NetworkOpenAd): Boolean {
-        return when (networkOpenAd) {
-            NetworkOpenAd.ADMOB -> admobOpenAd.isShowingAd
+    private fun handleIsShowing(networkAds: NetworkAds): Boolean {
+        return when (networkAds) {
+            NetworkAds.ADMOB -> admobOpenAd.isShowingAd
+            else -> false
         }
     }
-}
-
-enum class NetworkOpenAd {
-    ADMOB
 }

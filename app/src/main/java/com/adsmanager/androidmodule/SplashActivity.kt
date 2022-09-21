@@ -7,7 +7,7 @@ import android.os.CountDownTimer
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.adsmanager.ads.AdsManagerOpenAd
-import com.adsmanager.ads.NetworkOpenAd
+import com.adsmanager.ads.NetworkAds
 import com.adsmanager.core.CallbackAds
 import com.adsmanager.core.CallbackOpenAd
 import org.koin.android.ext.android.inject
@@ -25,7 +25,7 @@ class SplashActivity : AppCompatActivity() {
 
     private val adsManagerOpenAd: AdsManagerOpenAd by inject()
     private var secondsRemaining: Long = 0L
-    private val adUnitOpenAdId = "ca-app-pub-3940256099942544/3419835294"
+    private val adUnitOpenAdId = "ca-app-pub-3940256099942544/3419835294XX"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,12 +34,14 @@ class SplashActivity : AppCompatActivity() {
         ConfigAds.primaryOpenAdId = adUnitOpenAdId
         adsManagerOpenAd.loadAd(
             this,
-            NetworkOpenAd.ADMOB,
-            adUnitOpenAdId,
-            null,
-            null,
-            null,
-            null,
+            NetworkAds.ADMOB,
+            "ca-app-pub-3940256099942544/3419835294",
+            NetworkAds.ADMOB,
+            "ca-app-pub-3940256099942544/3419835294X",
+            NetworkAds.APPLOVIN_MAX,
+            "",
+            NetworkAds.ADMOB,
+            "ca-app-pub-3940256099942544/3419835294XXX",
             object :
                 CallbackAds() {
                 override fun onAdFailedToLoad(error: String?) {
@@ -69,12 +71,14 @@ class SplashActivity : AppCompatActivity() {
                 secondsRemaining = 0
                 adsManagerOpenAd.showAdIfAvailable(
                     this@SplashActivity,
-                    NetworkOpenAd.ADMOB,
+                    NetworkAds.ADMOB,
                     adUnitOpenAdId,
                     null,
+                    "",
                     null,
+                    "",
                     null,
-                    null,
+                    "",
                     object : CallbackOpenAd() {
 
                         override fun onAdFailedToLoad(error: String?) {

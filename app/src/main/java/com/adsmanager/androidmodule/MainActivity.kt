@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.adsmanager.ads.AdsManager
 import com.adsmanager.ads.AdsManagerOpenAd
 import com.adsmanager.ads.NetworkAds
-import com.adsmanager.ads.NetworkOpenAd
 import com.adsmanager.core.CallbackAds
 import com.adsmanager.core.CallbackOpenAd
 import com.adsmanager.core.IRewards
@@ -23,14 +22,14 @@ class MainActivity : AppCompatActivity() {
     private val adsManager: AdsManager by inject()
     private val adsManagerOpenAd: AdsManagerOpenAd by inject()
 
-    private val primaryNetworkOpenAd = NetworkOpenAd.ADMOB
+    private val primaryNetworkOpenAd = NetworkAds.ADMOB
 
     private val primaryAds = NetworkAds.ADMOB
-    private val secondaryAds = NetworkAds.FAN
+    private val secondaryAds = NetworkAds.ADMOB
     private val tertiaryAds = NetworkAds.APPLOVIN_MAX
     private val quaternaryAds = NetworkAds.START_IO
 
-    private val adUnitOpenAdId = "ca-app-pub-3940256099942544/3419835294"
+    private val adUnitOpenAdId = "208690301"
 
     private val primaryAppId = ""
     private val secondaryAppId = ""
@@ -38,12 +37,14 @@ class MainActivity : AppCompatActivity() {
     private val quaternaryAppId = "208690301"
 
     private val primaryBannerId = "ca-app-pub-3940256099942544/6300978111XXX"
-    private val secondaryBannerId = "1363711600744576_1363713000744436"
+    private val secondaryBannerId = "ca-app-pub-3940256099942544/6300978111"
+//    private val secondaryBannerId = "1363711600744576_1363713000744436"
     private val tertiaryBannerId = "XXX"
     private val quaternaryBannerId = "62c9e910bbd85680"
 
     private val primaryInterstitialId = "ca-app-pub-3940256099942544/1033173712"
-    private val secondaryInterstitialId = "1363711600744576_1508878896227845"
+    private val secondaryInterstitialId = "ca-app-pub-3940256099942544/1033173712"
+//    private val secondaryInterstitialId = "1363711600744576_1508878896227845"
     private val tertiaryInterstitialId = "7263a762d1a5366b"
     private val quaternaryInterstitialId = "7263a762d1a5366b"
 
@@ -114,12 +115,14 @@ class MainActivity : AppCompatActivity() {
         findViewById<Button>(R.id.btnShowOpenApp).setOnClickListener {
             adsManagerOpenAd.showAdIfAvailable(
                 this,
-                primaryNetworkOpenAd,
-                adUnitOpenAdId,
+                ConfigAds.primaryAds,
+                ConfigAds.primaryOpenAdId,
+                ConfigAds.secondaryAds,
+                ConfigAds.secondaryOpenAdId,
                 null,
+                "",
                 null,
-                null,
-                null,
+                "",
                 object : CallbackOpenAd() {
                     override fun onAdFailedToLoad(error: String?) {
                         Log.e("HALLO", "openAd onAdFailedToLoad: $error")

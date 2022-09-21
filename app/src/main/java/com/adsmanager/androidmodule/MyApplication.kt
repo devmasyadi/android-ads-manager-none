@@ -1,14 +1,19 @@
+@file:Suppress("DEPRECATION")
+
 package com.adsmanager.androidmodule
 
 import android.app.Activity
 import android.app.Application
 import android.os.Bundle
+import android.util.Log
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
 import androidx.lifecycle.ProcessLifecycleOwner
 import com.adsmanager.ads.AdsManagerOpenAd
+import com.adsmanager.ads.NetworkAds
 import com.adsmanager.ads.di.adsManagerModule
+import com.adsmanager.core.CallbackAds
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -31,7 +36,7 @@ class MyApplication : Application(), Application.ActivityLifecycleCallbacks, Lif
             )
         }
         ProcessLifecycleOwner.get().lifecycle.addObserver(this)
-        adsManagerOpenAd = app.koin.get<AdsManagerOpenAd>()
+        adsManagerOpenAd = app.koin.get()
 
     }
 
@@ -43,12 +48,14 @@ class MyApplication : Application(), Application.ActivityLifecycleCallbacks, Lif
         adsManagerOpenAd?.getCurrentActivity()?.let {
             adsManagerOpenAd?.showAdIfAvailable(
                 it,
-                ConfigAds.primaryNetworkOpenAd,
+                ConfigAds.primaryAds,
                 ConfigAds.primaryOpenAdId,
-                ConfigAds.secondaryNetworkOpenAd,
+                ConfigAds.secondaryAds,
+                ConfigAds.secondaryOpenAdId,
                 null,
+                "",
                 null,
-                null,
+                "",
                 null
             )
         }
@@ -62,7 +69,7 @@ class MyApplication : Application(), Application.ActivityLifecycleCallbacks, Lif
         // SDK or another activity class implemented by a third party mediation partner. Updating the
         // currentActivity only when an ad is not showing will ensure it is not an ad activity, but the
         // one that shows the ad.
-        if (adsManagerOpenAd?.isShowingAd(ConfigAds.primaryNetworkOpenAd) == false) {
+        if (adsManagerOpenAd?.isShowingAd() == false) {
             adsManagerOpenAd?.setCurrentActivity(activity)
         }
     }

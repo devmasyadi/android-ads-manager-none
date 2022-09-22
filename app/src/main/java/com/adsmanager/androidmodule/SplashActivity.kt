@@ -35,13 +35,13 @@ class SplashActivity : AppCompatActivity() {
         adsManagerOpenAd.loadAd(
             this,
             NetworkAds.ADMOB,
-            "ca-app-pub-3940256099942544/3419835294",
+            "ca-app-pub-3940256099942544/3419835294XX",
             NetworkAds.ADMOB,
-            "ca-app-pub-3940256099942544/3419835294X",
+            "ca-app-pub-3940256099942544/3419835294",
             NetworkAds.APPLOVIN_MAX,
             "",
             NetworkAds.ADMOB,
-            "ca-app-pub-3940256099942544/3419835294XXX",
+            "ca-app-pub-3940256099942544/3419835294XX",
             object :
                 CallbackAds() {
                 override fun onAdFailedToLoad(error: String?) {
@@ -72,13 +72,13 @@ class SplashActivity : AppCompatActivity() {
                 adsManagerOpenAd.showAdIfAvailable(
                     this@SplashActivity,
                     NetworkAds.ADMOB,
-                    adUnitOpenAdId,
-                    null,
+                    "ca-app-pub-3940256099942544/3419835294XX",
+                    NetworkAds.ADMOB,
+                    "ca-app-pub-3940256099942544/3419835294",
+                    NetworkAds.APPLOVIN_MAX,
                     "",
-                    null,
-                    "",
-                    null,
-                    "",
+                    NetworkAds.ADMOB,
+                    "ca-app-pub-3940256099942544/3419835294XX",
                     object : CallbackOpenAd() {
 
                         override fun onAdFailedToLoad(error: String?) {

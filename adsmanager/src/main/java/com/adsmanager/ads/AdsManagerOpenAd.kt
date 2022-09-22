@@ -100,9 +100,7 @@ class AdsManagerOpenAd(
     ) {
         handleShow(activity, primaryOpenAdUnitId, primaryNetwork, object : CallbackOpenAd() {
             override fun onShowAdComplete() {
-                if (secondaryNetwork == null) {
-                    callbackOpenAd?.onShowAdComplete()
-                }
+                callbackOpenAd?.onShowAdComplete()
             }
 
             override fun onAdFailedToLoad(error: String?) {
@@ -114,9 +112,7 @@ class AdsManagerOpenAd(
                         secondaryNetwork,
                         object : CallbackOpenAd() {
                             override fun onShowAdComplete() {
-                                if (tertiaryNetwork == null) {
-                                    callbackOpenAd?.onShowAdComplete()
-                                }
+                                callbackOpenAd?.onShowAdComplete()
                             }
 
                             override fun onAdFailedToLoad(error: String?) {
@@ -128,9 +124,7 @@ class AdsManagerOpenAd(
                                         tertiaryNetwork,
                                         object : CallbackOpenAd() {
                                             override fun onShowAdComplete() {
-                                                if (quaternaryNetwork == null) {
-                                                    callbackOpenAd?.onShowAdComplete()
-                                                }
+                                                callbackOpenAd?.onShowAdComplete()
                                             }
 
                                             override fun onAdFailedToLoad(error: String?) {

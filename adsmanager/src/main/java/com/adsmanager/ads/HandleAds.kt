@@ -28,10 +28,10 @@ class HandleAds(
         networkAds: NetworkAds
     ) {
         when (networkAds) {
-            NetworkAds.ADMOB -> admobAds.initialize(context, iInitialize)
+            NetworkAds.ADMOB -> admobAds.initialize(context, appId, iInitialize)
             NetworkAds.FAN -> fanAds.initialize(context, iInitialize)
-            NetworkAds.APPLOVIN_MAX -> applovinMaxAds.initialize(context, iInitialize)
-            NetworkAds.APPLOVIN_DISCOVERY -> applovinDiscoveryAds.initialize(context, iInitialize)
+            NetworkAds.APPLOVIN_MAX -> applovinMaxAds.initialize(context, appId, iInitialize)
+            NetworkAds.APPLOVIN_DISCOVERY -> applovinDiscoveryAds.initialize(context, appId, iInitialize)
             NetworkAds.START_IO -> startIoAds.initialize(context, appId,iInitialize)
         }
     }

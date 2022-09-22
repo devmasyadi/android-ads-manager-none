@@ -40,9 +40,9 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
     implementation 'com.github.devmasyadi:android-ads-manager-core:1.0.5'
-    implementation 'com.github.devmasyadi:android-admob-module:1.0.5'
+    implementation 'com.github.devmasyadi:android-admob-module:1.0.6'
     implementation 'com.github.devmasyadi:android-fan-module:1.0.2'
-    implementation 'com.github.devmasyadi:android-applovin-module:1.0.2'
+    implementation 'com.github.devmasyadi:android-applovin-module:1.0.3'
     implementation 'com.github.devmasyadi:android-startio-module:1.0.0'
 
     //koin

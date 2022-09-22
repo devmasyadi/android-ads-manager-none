@@ -168,6 +168,9 @@ class AdsManager(
         callbackAds: CallbackAds?
     ) {
         handleAds.showInterstitial(activity, primaryAds, adUnitPrimaryId, object : CallbackAds() {
+            override fun onAdLoaded() {
+                callbackAds?.onAdLoaded()
+            }
             override fun onAdFailedToLoad(error: String?) {
                 callbackAds?.onAdFailedToLoad(error)
                 secondaryAds?.let {
@@ -176,6 +179,9 @@ class AdsManager(
                         secondaryAds,
                         adUnitSecondaryId,
                         object : CallbackAds() {
+                            override fun onAdLoaded() {
+                                callbackAds?.onAdLoaded()
+                            }
                             override fun onAdFailedToLoad(error: String?) {
                                 callbackAds?.onAdFailedToLoad(error)
                                 tertiaryAds?.let {
@@ -184,6 +190,9 @@ class AdsManager(
                                         tertiaryAds,
                                         adUnitTertiaryAdsId,
                                         object : CallbackAds() {
+                                            override fun onAdLoaded() {
+                                                callbackAds?.onAdLoaded()
+                                            }
                                             override fun onAdFailedToLoad(error: String?) {
                                                 callbackAds?.onAdFailedToLoad(error)
                                                 quaternaryAds?.let {
@@ -227,6 +236,9 @@ class AdsManager(
             primaryAds,
             adUnitPrimaryId,
             object : CallbackAds() {
+                override fun onAdLoaded() {
+                    callbackAds?.onAdLoaded()
+                }
                 override fun onAdFailedToLoad(error: String?) {
                     callbackAds?.onAdFailedToLoad(error)
                     secondaryAds?.let {
@@ -237,6 +249,9 @@ class AdsManager(
                             secondaryAds,
                             adUnitSecondaryId,
                             object : CallbackAds() {
+                                override fun onAdLoaded() {
+                                    callbackAds?.onAdLoaded()
+                                }
                                 override fun onAdFailedToLoad(error: String?) {
                                     callbackAds?.onAdFailedToLoad(error)
                                     tertiaryAds?.let {
@@ -247,6 +262,9 @@ class AdsManager(
                                             tertiaryAds,
                                             adUnitTertiaryAdsId,
                                             object : CallbackAds() {
+                                                override fun onAdLoaded() {
+                                                    callbackAds?.onAdLoaded()
+                                                }
                                                 override fun onAdFailedToLoad(error: String?) {
                                                     callbackAds?.onAdFailedToLoad(error)
                                                     quaternaryAds?.let {
@@ -316,6 +334,9 @@ class AdsManager(
         iRewards: IRewards?
     ) {
         handleAds.showRewards(activity, primaryAds, adUnitPrimaryId, object : CallbackAds() {
+            override fun onAdLoaded() {
+                callbackAds?.onAdLoaded()
+            }
             override fun onAdFailedToLoad(error: String?) {
                 callbackAds?.onAdFailedToLoad(error)
                 secondaryAds?.let {
@@ -324,6 +345,9 @@ class AdsManager(
                         secondaryAds,
                         adUnitSecondaryId,
                         object : CallbackAds() {
+                            override fun onAdLoaded() {
+                                callbackAds?.onAdLoaded()
+                            }
                             override fun onAdFailedToLoad(error: String?) {
                                 callbackAds?.onAdFailedToLoad(error)
                                 tertiaryAds?.let {
@@ -332,6 +356,9 @@ class AdsManager(
                                         tertiaryAds,
                                         adUnitTertiaryAdsId,
                                         object : CallbackAds() {
+                                            override fun onAdLoaded() {
+                                                callbackAds?.onAdLoaded()
+                                            }
                                             override fun onAdFailedToLoad(error: String?) {
                                                 callbackAds?.onAdFailedToLoad(error)
                                                 quaternaryAds?.let {

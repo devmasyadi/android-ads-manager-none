@@ -81,7 +81,7 @@ class AdsManager(
             adUnitPrimaryId,
             object : CallbackAds() {
                 override fun onAdFailedToLoad(error: String?) {
-                    callbackAds?.onAdFailedToLoad(error)
+                    if (secondaryAds == null) callbackAds?.onAdFailedToLoad(error)
                     secondaryAds?.let {
                         handleAds.showBanner(
                             activity,
@@ -91,7 +91,7 @@ class AdsManager(
                             adUnitSecondaryId,
                             object : CallbackAds() {
                                 override fun onAdFailedToLoad(error: String?) {
-                                    callbackAds?.onAdFailedToLoad(error)
+                                    if (tertiaryAds == null) callbackAds?.onAdFailedToLoad(error)
                                     tertiaryAds?.let {
                                         handleAds.showBanner(
                                             activity,
@@ -101,7 +101,7 @@ class AdsManager(
                                             adUnitTertiaryAdsId,
                                             object : CallbackAds() {
                                                 override fun onAdFailedToLoad(error: String?) {
-                                                    callbackAds?.onAdFailedToLoad(error)
+                                                    if (quaternaryAds == null) callbackAds?.onAdFailedToLoad(error)
                                                     quaternaryAds?.let {
                                                         handleAds.showBanner(
                                                             activity,
@@ -172,7 +172,7 @@ class AdsManager(
                 callbackAds?.onAdLoaded()
             }
             override fun onAdFailedToLoad(error: String?) {
-                callbackAds?.onAdFailedToLoad(error)
+                if (secondaryAds == null) callbackAds?.onAdFailedToLoad(error)
                 secondaryAds?.let {
                     handleAds.showInterstitial(
                         activity,
@@ -183,7 +183,7 @@ class AdsManager(
                                 callbackAds?.onAdLoaded()
                             }
                             override fun onAdFailedToLoad(error: String?) {
-                                callbackAds?.onAdFailedToLoad(error)
+                                if (tertiaryAds == null) callbackAds?.onAdFailedToLoad(error)
                                 tertiaryAds?.let {
                                     handleAds.showInterstitial(
                                         activity,
@@ -194,7 +194,7 @@ class AdsManager(
                                                 callbackAds?.onAdLoaded()
                                             }
                                             override fun onAdFailedToLoad(error: String?) {
-                                                callbackAds?.onAdFailedToLoad(error)
+                                                if (quaternaryAds == null) callbackAds?.onAdFailedToLoad(error)
                                                 quaternaryAds?.let {
                                                     handleAds.showInterstitial(
                                                         activity,
@@ -240,7 +240,7 @@ class AdsManager(
                     callbackAds?.onAdLoaded()
                 }
                 override fun onAdFailedToLoad(error: String?) {
-                    callbackAds?.onAdFailedToLoad(error)
+                    if (secondaryAds == null) callbackAds?.onAdFailedToLoad(error)
                     secondaryAds?.let {
                         handleAds.showNativeAds(
                             activity,
@@ -253,7 +253,7 @@ class AdsManager(
                                     callbackAds?.onAdLoaded()
                                 }
                                 override fun onAdFailedToLoad(error: String?) {
-                                    callbackAds?.onAdFailedToLoad(error)
+                                    if (tertiaryAds == null) callbackAds?.onAdFailedToLoad(error)
                                     tertiaryAds?.let {
                                         handleAds.showNativeAds(
                                             activity,
@@ -266,7 +266,7 @@ class AdsManager(
                                                     callbackAds?.onAdLoaded()
                                                 }
                                                 override fun onAdFailedToLoad(error: String?) {
-                                                    callbackAds?.onAdFailedToLoad(error)
+                                                    if (quaternaryAds == null) callbackAds?.onAdFailedToLoad(error)
                                                     quaternaryAds?.let {
                                                         handleAds.showNativeAds(
                                                             activity,
@@ -338,7 +338,7 @@ class AdsManager(
                 callbackAds?.onAdLoaded()
             }
             override fun onAdFailedToLoad(error: String?) {
-                callbackAds?.onAdFailedToLoad(error)
+                if (secondaryAds == null) callbackAds?.onAdFailedToLoad(error)
                 secondaryAds?.let {
                     handleAds.showRewards(
                         activity,
@@ -349,7 +349,7 @@ class AdsManager(
                                 callbackAds?.onAdLoaded()
                             }
                             override fun onAdFailedToLoad(error: String?) {
-                                callbackAds?.onAdFailedToLoad(error)
+                                if (tertiaryAds == null) callbackAds?.onAdFailedToLoad(error)
                                 tertiaryAds?.let {
                                     handleAds.showRewards(
                                         activity,
@@ -360,7 +360,7 @@ class AdsManager(
                                                 callbackAds?.onAdLoaded()
                                             }
                                             override fun onAdFailedToLoad(error: String?) {
-                                                callbackAds?.onAdFailedToLoad(error)
+                                                if (quaternaryAds == null) callbackAds?.onAdFailedToLoad(error)
                                                 quaternaryAds?.let {
                                                     handleAds.showRewards(
                                                         activity,

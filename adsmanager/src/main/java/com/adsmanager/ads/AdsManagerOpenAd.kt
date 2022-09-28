@@ -1,12 +1,11 @@
 package com.adsmanager.ads
 
 import android.app.Activity
-import com.adsmanager.admob.AdmobOpenAd
 import com.adsmanager.core.CallbackAds
 import com.adsmanager.core.CallbackOpenAd
 
 class AdsManagerOpenAd(
-    private val admobOpenAd: AdmobOpenAd
+
 ) {
 
     private var currentActivity: Activity? = null
@@ -14,7 +13,6 @@ class AdsManagerOpenAd(
 
     fun setCurrentActivity(activity: Activity) {
         this.currentActivity = activity
-        admobOpenAd.currentActivity = currentActivity
     }
 
     fun getCurrentActivity() = currentActivity
@@ -156,7 +154,6 @@ class AdsManagerOpenAd(
         callbackAds: CallbackAds?
     ) {
         when (networkAds) {
-            NetworkAds.ADMOB -> admobOpenAd.loadAd(activity, adUnitId, callbackAds)
             else -> {
                 callbackAds?.onAdFailedToLoad("Open Ad ${networkAds.name} not available")
             }
@@ -172,7 +169,6 @@ class AdsManagerOpenAd(
         when (networkAds) {
             NetworkAds.ADMOB -> {
                 currentNetworkAds = networkAds
-                admobOpenAd.showAdIfAvailable(activity, adUnitId, callbackOpenAd)
             }
             else -> {
                 callbackOpenAd?.onAdFailedToLoad("Open Ad ${networkAds.name} not available")
@@ -182,7 +178,6 @@ class AdsManagerOpenAd(
 
     private fun handleIsShowing(networkAds: NetworkAds): Boolean {
         return when (networkAds) {
-            NetworkAds.ADMOB -> admobOpenAd.isShowingAd
             else -> false
         }
     }

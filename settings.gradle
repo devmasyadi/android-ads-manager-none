@@ -14,6 +14,6 @@ dependencyResolutionManagement {
         maven { url 'https://jitpack.io' }
     }
 }
-rootProject.name = "Admob-Fan-Applovin"
+rootProject.name = "Ads Manager None"
 include ':app'
 include ':adsmanager'

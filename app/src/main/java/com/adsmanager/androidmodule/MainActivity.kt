@@ -38,13 +38,15 @@ class MainActivity : AppCompatActivity() {
 
     private val primaryBannerId = "ca-app-pub-3940256099942544/6300978111XXX"
     private val secondaryBannerId = "ca-app-pub-3940256099942544/6300978111"
-//    private val secondaryBannerId = "1363711600744576_1363713000744436"
+
+    //    private val secondaryBannerId = "1363711600744576_1363713000744436"
     private val tertiaryBannerId = "XXX"
     private val quaternaryBannerId = "62c9e910bbd85680"
 
     private val primaryInterstitialId = "ca-app-pub-3940256099942544/1033173712"
     private val secondaryInterstitialId = "ca-app-pub-3940256099942544/1033173712"
-//    private val secondaryInterstitialId = "1363711600744576_1508878896227845"
+
+    //    private val secondaryInterstitialId = "1363711600744576_1508878896227845"
     private val tertiaryInterstitialId = "7263a762d1a5366b"
     private val quaternaryInterstitialId = "7263a762d1a5366b"
 
@@ -79,7 +81,14 @@ class MainActivity : AppCompatActivity() {
             quaternaryAppId = quaternaryAppId,
         )
 
-        adsManager.loadGdpr(this@MainActivity, true, primaryAds, secondaryAds, tertiaryAds, quaternaryAds)
+        adsManager.loadGdpr(
+            this@MainActivity,
+            true,
+            primaryAds,
+            secondaryAds,
+            tertiaryAds,
+            quaternaryAds
+        )
         adsManager.loadInterstitial(
             this@MainActivity,
             primaryAds,

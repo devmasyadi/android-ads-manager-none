@@ -7,9 +7,9 @@ import android.os.CountDownTimer
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.adsmanager.ads.AdsManagerOpenAd
-import com.adsmanager.ads.NetworkAds
 import com.adsmanager.core.CallbackAds
 import com.adsmanager.core.CallbackOpenAd
+import com.adsmanager.core.NetworkAds
 import org.koin.android.ext.android.inject
 
 /**

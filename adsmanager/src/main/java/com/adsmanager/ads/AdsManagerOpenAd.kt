@@ -3,6 +3,7 @@ package com.adsmanager.ads
 import android.app.Activity
 import com.adsmanager.core.CallbackAds
 import com.adsmanager.core.CallbackOpenAd
+import com.adsmanager.core.NetworkAds
 
 class AdsManagerOpenAd(
 

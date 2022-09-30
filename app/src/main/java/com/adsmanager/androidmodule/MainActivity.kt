@@ -7,11 +7,7 @@ import android.widget.RelativeLayout
 import androidx.appcompat.app.AppCompatActivity
 import com.adsmanager.ads.AdsManager
 import com.adsmanager.ads.AdsManagerOpenAd
-import com.adsmanager.ads.NetworkAds
-import com.adsmanager.core.CallbackAds
-import com.adsmanager.core.CallbackOpenAd
-import com.adsmanager.core.IRewards
-import com.adsmanager.core.RewardsItem
+import com.adsmanager.core.*
 import com.adsmanager.core.iadsmanager.IInitialize
 import com.adsmanager.core.iadsmanager.SizeBanner
 import com.adsmanager.core.iadsmanager.SizeNative

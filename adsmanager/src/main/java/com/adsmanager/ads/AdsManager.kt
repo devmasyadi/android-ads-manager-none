@@ -4,11 +4,11 @@ import android.app.Activity
 import android.content.Context
 import android.widget.RelativeLayout
 import com.adsmanager.core.CallbackAds
-import com.adsmanager.core.IRewards
 import com.adsmanager.core.NetworkAds
+import com.adsmanager.core.SizeBanner
+import com.adsmanager.core.SizeNative
 import com.adsmanager.core.iadsmanager.IInitialize
-import com.adsmanager.core.iadsmanager.SizeBanner
-import com.adsmanager.core.iadsmanager.SizeNative
+import com.adsmanager.core.rewards.IRewards
 
 class AdsManager(
     private val handleAds: HandleAds
@@ -102,7 +102,9 @@ class AdsManager(
                                             adUnitTertiaryAdsId,
                                             object : CallbackAds() {
                                                 override fun onAdFailedToLoad(error: String?) {
-                                                    if (quaternaryAds == null) callbackAds?.onAdFailedToLoad(error)
+                                                    if (quaternaryAds == null) callbackAds?.onAdFailedToLoad(
+                                                        error
+                                                    )
                                                     quaternaryAds?.let {
                                                         handleAds.showBanner(
                                                             activity,
@@ -172,6 +174,7 @@ class AdsManager(
             override fun onAdLoaded() {
                 callbackAds?.onAdLoaded()
             }
+
             override fun onAdFailedToLoad(error: String?) {
                 if (secondaryAds == null) callbackAds?.onAdFailedToLoad(error)
                 secondaryAds?.let {
@@ -183,6 +186,7 @@ class AdsManager(
                             override fun onAdLoaded() {
                                 callbackAds?.onAdLoaded()
                             }
+
                             override fun onAdFailedToLoad(error: String?) {
                                 if (tertiaryAds == null) callbackAds?.onAdFailedToLoad(error)
                                 tertiaryAds?.let {
@@ -194,8 +198,11 @@ class AdsManager(
                                             override fun onAdLoaded() {
                                                 callbackAds?.onAdLoaded()
                                             }
+
                                             override fun onAdFailedToLoad(error: String?) {
-                                                if (quaternaryAds == null) callbackAds?.onAdFailedToLoad(error)
+                                                if (quaternaryAds == null) callbackAds?.onAdFailedToLoad(
+                                                    error
+                                                )
                                                 quaternaryAds?.let {
                                                     handleAds.showInterstitial(
                                                         activity,
@@ -240,6 +247,7 @@ class AdsManager(
                 override fun onAdLoaded() {
                     callbackAds?.onAdLoaded()
                 }
+
                 override fun onAdFailedToLoad(error: String?) {
                     if (secondaryAds == null) callbackAds?.onAdFailedToLoad(error)
                     secondaryAds?.let {
@@ -253,6 +261,7 @@ class AdsManager(
                                 override fun onAdLoaded() {
                                     callbackAds?.onAdLoaded()
                                 }
+
                                 override fun onAdFailedToLoad(error: String?) {
                                     if (tertiaryAds == null) callbackAds?.onAdFailedToLoad(error)
                                     tertiaryAds?.let {
@@ -266,8 +275,11 @@ class AdsManager(
                                                 override fun onAdLoaded() {
                                                     callbackAds?.onAdLoaded()
                                                 }
+
                                                 override fun onAdFailedToLoad(error: String?) {
-                                                    if (quaternaryAds == null) callbackAds?.onAdFailedToLoad(error)
+                                                    if (quaternaryAds == null) callbackAds?.onAdFailedToLoad(
+                                                        error
+                                                    )
                                                     quaternaryAds?.let {
                                                         handleAds.showNativeAds(
                                                             activity,
@@ -338,6 +350,7 @@ class AdsManager(
             override fun onAdLoaded() {
                 callbackAds?.onAdLoaded()
             }
+
             override fun onAdFailedToLoad(error: String?) {
                 if (secondaryAds == null) callbackAds?.onAdFailedToLoad(error)
                 secondaryAds?.let {
@@ -349,6 +362,7 @@ class AdsManager(
                             override fun onAdLoaded() {
                                 callbackAds?.onAdLoaded()
                             }
+
                             override fun onAdFailedToLoad(error: String?) {
                                 if (tertiaryAds == null) callbackAds?.onAdFailedToLoad(error)
                                 tertiaryAds?.let {
@@ -360,8 +374,11 @@ class AdsManager(
                                             override fun onAdLoaded() {
                                                 callbackAds?.onAdLoaded()
                                             }
+
                                             override fun onAdFailedToLoad(error: String?) {
-                                                if (quaternaryAds == null) callbackAds?.onAdFailedToLoad(error)
+                                                if (quaternaryAds == null) callbackAds?.onAdFailedToLoad(
+                                                    error
+                                                )
                                                 quaternaryAds?.let {
                                                     handleAds.showRewards(
                                                         activity,

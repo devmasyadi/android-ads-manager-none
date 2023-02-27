@@ -9,8 +9,8 @@ import com.adsmanager.ads.AdsManager
 import com.adsmanager.ads.AdsManagerOpenAd
 import com.adsmanager.core.*
 import com.adsmanager.core.iadsmanager.IInitialize
-import com.adsmanager.core.iadsmanager.SizeBanner
-import com.adsmanager.core.iadsmanager.SizeNative
+import com.adsmanager.core.rewards.IRewards
+import com.adsmanager.core.rewards.RewardsItem
 import org.koin.android.ext.android.inject
 
 class MainActivity : AppCompatActivity() {
